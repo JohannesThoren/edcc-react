@@ -7,16 +7,22 @@
   justify-content: center;
   column-gap: 10px;
   box-sizing: border-box;
+
   & * {
     width: 20vw;
   }
 }
+
 .settings-item {
-  min-height: 25vh;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 5px;
+  min-height: 30vh;
   border: 1px solid var(--accent-1);
   padding: 10px;
 
   box-shadow: var(--shadow);
+
   & * {
     box-sizing: border-box;
   }
@@ -24,7 +30,31 @@
 }
 
 .journal-settings {
-  & .path-string {
+  .path-string {
     overflow-x: auto;
+  }
+}
+
+
+.commander-settings {
+
+  .commander-list {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    overflow-y: auto;
+    max-height: 10vh;
+    border-bottom: 1px solid var(--accent-1);
+    border-top: 1px solid var(--accent-1);
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    .commander-list-item {
+      display: flex;
+
+      .btn {
+        width: 5vw;
+      }
+    }
   }
 }

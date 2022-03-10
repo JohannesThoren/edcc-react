@@ -32,7 +32,7 @@ export default class Settings extends React.Component<IProps, IState> {
                 {this.state.settings && (
                     <div className={"settings"}>
                         <JournalSettings journal_path={this.state.settings.journal_location}/>
-                        <CommanderSettings/>
+                        <CommanderSettings currentCommander={this.state.settings.current_commander} commanders={this.state.settings.commanders}/>
                     </div>
 
                 )
