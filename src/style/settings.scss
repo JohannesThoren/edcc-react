@@ -1,0 +1,30 @@
+.settings {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  box-sizing: border-box;
+  & * {
+    width: 20vw;
+  }
+}
+.settings-item {
+  min-height: 25vh;
+  border: 1px solid var(--accent-1);
+  padding: 10px;
+
+  box-shadow: var(--shadow);
+  & * {
+    box-sizing: border-box;
+  }
+
+}
+
+.journal-settings {
+  & .path-string {
+    overflow-x: auto;
+  }
+}

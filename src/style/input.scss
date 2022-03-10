@@ -1,0 +1,31 @@
+.btn {
+  color: var(--text-color);
+
+  text-decoration: none;
+  padding: 4px;
+  padding-inline: 10px;
+  transition: 0.2s all;
+
+  text-align: center;
+  border: 1px solid var(--accent-1);
+  background-color: var(--background-color);
+
+  &:hover {
+    background-color: var(--accent-1);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    z-index: 1000;
+  }
+}
+
+.input {
+  font-size: 1.1em;
+  border: none;
+  border-bottom: 1px dotted var(--accent-1);
+  background-color: black;
+  color: white;
+
+  &:focus {
+    box-shadow: var(--shadow);
+  }
+}
