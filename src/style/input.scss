@@ -22,7 +22,7 @@
   font-size: 1.1em;
   border: none;
   border-bottom: 1px dotted var(--accent-1);
-  background-color: black;
+  background-color: var(--background-color);
   color: white;
 
   &:focus {

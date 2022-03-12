@@ -1,10 +1,16 @@
 import React from "react";
+import axios from "axios"
+import ReactJson from 'react-json-view'
+import HistoryEventList from "../components/HistoryEventList";
+import InformationPanel from "../components/InformationPanel";
+
 
 interface IProps {
+    currentSystem: object
 }
 
 interface IState {
-    events: object[]
+    selectedEvent: object
 }
 
 export default class History extends React.Component<IProps, IState> {
@@ -12,15 +18,23 @@ export default class History extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            events: []
+            selectedEvent: {},
         }
     }
 
+    onEventSelectHandler = (e: object) => {
+        console.log("test");
+        this.setState({selectedEvent: e})
+    }
+
+
     render() {
+
+
         return (
             <div className={"history"}>
-                <div className={"event-list"}></div>
-                <div className={"information-panel"}></div>
+                <HistoryEventList onSelectEventHandler={this.onEventSelectHandler}/>
+                <InformationPanel currentSystem={this.props.currentSystem} selectedEvent={this.state.selectedEvent}/>
             </div>
         )
     };

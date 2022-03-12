@@ -1,7 +1,12 @@
 import axios from "axios";
 import {useState} from "react";
 
-export default function CommanderSettings(props: { currentCommander: string, commanders: object[] }) {
+
+interface Obj {
+    [key: string]: any
+}
+
+export default function CommanderSettings(props: { currentCommander: string, commanders: Obj[] }) {
 
     const [currentCommander, setCurrentCommander] = useState(props.currentCommander)
     const [newCommanderName, setNewCommanderName] = useState("")
@@ -50,10 +55,9 @@ export default function CommanderSettings(props: { currentCommander: string, com
             <h4>Commanders</h4>
             <div className={"commander-list"}>
                 {props.commanders && props.commanders.map((c, i) => {
-                    // @ts-ignore
                     const name = c.name
 
-                    return (<div className={"commander-list-item"}>
+                    return (<div key={c.name} className={"commander-list-item"}>
                         <span>{name}</span>
                         {/*<button className={"btn"}>Delete</button>*/}
                         <button className={"btn"} onClick={async () => await setCurrentCommanderCall(name)}>Select
