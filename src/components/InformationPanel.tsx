@@ -26,7 +26,7 @@ export default class InformationPanel extends React.Component<IProps, IState> {
                         </div>
                     )}
 
-                    {this.props.selectedEvent && (
+                    {this.props.currentSystem && (
                         <div className={"current-system"}>
                             <CurrentSystemData currentSystem={this.props.currentSystem}/>
                         </div>

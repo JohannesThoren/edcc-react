@@ -39,66 +39,78 @@ export default class CurrentSystemData extends React.Component<IProps, IState> {
                         </div>
                         <div className={"item"}>
                             <span>System Coords</span>
-                            <span className={"emph"}>x: {this.props.currentSystem.coords.x}</span>
-                            <span className={"emph"}>y: {this.props.currentSystem.coords.y}</span>
-                            <span className={"emph"}>z: {this.props.currentSystem.coords.z}</span>
+                            {this.props.currentSystem.coords && (
+                                <>
+                                    <span className={"emph"}>x: {this.props.currentSystem.coords.x}</span>
+                                    <span className={"emph"}>y: {this.props.currentSystem.coords.y}</span>
+                                    <span className={"emph"}>z: {this.props.currentSystem.coords.z}</span>
+                                </>
+                            )}
                         </div>
+
                         <div className={"item"}>
                             <span>System Permit</span>
-                            {!this.props.currentSystem.requirePermit ? (
-                                <span className={"emph"}>Does not require permit</span>
-                            ) : (<span className={"emph"}>System requires permit</span>)}
+                            {!this.props.currentSystem.requirePermit && (
+                                <span className={"emph"}>Does not require permit</span>)}
+                            {this.props.currentSystem.requirePermit && (
+                                <span className={"emph"}>System requires permit</span>)}
+
                         </div>
-                        <div className={"item"}>
-                            <span>Primary Star</span>
-                            <span className={"emph"}>{this.props.currentSystem.primaryStar.name}</span>
-                        </div>
-                        <div className={"item"}>
-                            <span>Primary Star Type</span>
-                            <span className={"emph"}>{this.props.currentSystem.primaryStar.type}</span>
-                        </div>
-                        <div className={"item"}>
-                            <span>Primary Star Scoopable</span>
-                            {this.props.currentSystem.primaryStar.isScoopable ? (
-                                <span className={"emph"}>Star is scoopable</span>
-                            ) : (<span className={"emph"}>Star is not scoopable</span>)}
-                        </div>
-                        <div className={"item"}>
-                            <span>Allegiance</span>
-                            <span className={"emph"}>{this.props.currentSystem.information.allegiance}</span>
-                        </div>
-                        <div className={"item"}>
-                            <span>Government</span>
-                            <span className={"emph"}>{this.props.currentSystem.information.government}</span>
-                        </div>
-                        <div className={"item"}>
-                            <span>Faction</span>
-                            <span className={"emph"}>{this.props.currentSystem.information.faction}</span>
-                        </div>
-                        <div className={"item"}>
-                            <span>Faction State</span>
-                            <span className={"emph"}>{this.props.currentSystem.information.factionState}</span>
-                        </div>
-                        <div className={"item"}>
-                            <span>Population</span>
-                            <span className={"emph"}>{this.props.currentSystem.information.population}</span>
-                        </div>
-                        <div className={"item"}>
-                            <span>Security</span>
-                            <span className={"emph"}>{this.props.currentSystem.information.security}</span>
-                        </div>
-                        <div className={"item"}>
-                            <span>Economy</span>
-                            <span className={"emph"}>{this.props.currentSystem.information.economy}</span>
-                        </div>
-                        <div className={"item"}>
-                            <span>Second Economy</span>
-                            <span className={"emph"}>{this.props.currentSystem.information.secondEconomy}</span>
-                        </div>
-                        <div className={"item"}>
-                            <span>Reserve</span>
-                            <span className={"emph"}>{this.props.currentSystem.information.reserve}</span>
-                        </div>
+                        {this.props.currentSystem.primaryStar && (<>
+                            <div className={"item"}>
+                                <span>Primary Star</span>
+                                <span className={"emph"}>{this.props.currentSystem.primaryStar.name}</span>
+                            </div>
+                            <div className={"item"}>
+                                <span>Primary Star Type</span>
+                                <span className={"emph"}>{this.props.currentSystem.primaryStar.type}</span>
+                            </div>
+                            <div className={"item"}>
+                                <span>Primary Star Scoopable</span>
+                                {this.props.currentSystem.primaryStar.isScoopable ? (
+                                    <span className={"emph"}>Star is scoopable</span>
+                                ) : (<span className={"emph"}>Star is not scoopable</span>)}
+                            </div>
+                        </>)}
+
+                        {this.props.currentSystem.information && (<>
+                            <div className={"item"}>
+                                <span>Allegiance</span>
+                                <span className={"emph"}>{this.props.currentSystem.information.allegiance}</span>
+                            </div>
+                            <div className={"item"}>
+                                <span>Government</span>
+                                <span className={"emph"}>{this.props.currentSystem.information.government}</span>
+                            </div>
+                            <div className={"item"}>
+                                <span>Faction</span>
+                                <span className={"emph"}>{this.props.currentSystem.information.faction}</span>
+                            </div>
+                            <div className={"item"}>
+                                <span>Faction State</span>
+                                <span className={"emph"}>{this.props.currentSystem.information.factionState}</span>
+                            </div>
+                            <div className={"item"}>
+                                <span>Population</span>
+                                <span className={"emph"}>{this.props.currentSystem.information.population}</span>
+                            </div>
+                            <div className={"item"}>
+                                <span>Security</span>
+                                <span className={"emph"}>{this.props.currentSystem.information.security}</span>
+                            </div>
+                            <div className={"item"}>
+                                <span>Economy</span>
+                                <span className={"emph"}>{this.props.currentSystem.information.economy}</span>
+                            </div>
+                            <div className={"item"}>
+                                <span>Second Economy</span>
+                                <span className={"emph"}>{this.props.currentSystem.information.secondEconomy}</span>
+                            </div>
+                            <div className={"item"}>
+                                <span>Reserve</span>
+                                <span className={"emph"}>{this.props.currentSystem.information.reserve}</span>
+                            </div>
+                        </>)}
                     </>
                 )}
             </>

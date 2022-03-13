@@ -20,7 +20,7 @@ export default class HistoryEventList extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             events: [],
-            autoscroll: false
+            autoscroll: true
 
         }
     }
@@ -60,6 +60,13 @@ export default class HistoryEventList extends React.Component<IProps, IState> {
         clearInterval(this.fetchInterval)
     }
 
+    list: any
+
+    componentDidUpdate() {
+        if (this.state.autoscroll) {
+            this.list.scrollTop = this.list.scrollHeight
+        }
+    }
 
     render() {
         return (
@@ -71,9 +78,13 @@ export default class HistoryEventList extends React.Component<IProps, IState> {
                         <span className={"emph"}>Active</span>) : (
                         <span className={"emph"}>not active</span>)} </button>
                 </div>
-                <div className={"event-list"}>
+                <div
+                    ref={(e) => {
+                    this.list = e
+                }} className={"event-list"}>
                     {this.state.events && this.state.events.map((e, i) => (
-                        <div key={`${i}`} onClick={() => this.props.onSelectEventHandler(e)}
+                        <div tabIndex={this.state.events.length - i} key={`${i}`}
+                             onFocus={() => this.props.onSelectEventHandler(e)}
                              className={"event-list-item"}><span>{e.timestamp}</span><span>{e.event}</span></div>
                     ))}
                 </div>
