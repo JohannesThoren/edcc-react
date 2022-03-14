@@ -7,6 +7,7 @@ import History from "./pages/History"
 import DetailedSystemInformation from "./pages/DetailedSystemInformation"
 import "./style/style.scss"
 import axios from "axios";
+import Home from "./pages/Home";
 
 interface obj {
     [key: string]: any
@@ -41,12 +42,15 @@ export default class App extends React.Component<IProps, IState> {
         return (
             <div className="App">
                 <BrowserRouter>
+                    <Layout/>
+
                     <Routes>
-                        <Route path="/" element={<Layout/>}>
-                            <Route path="/history" element={<History currentSystem={this.state.currentSystem}/>}/>
-                            <Route path="/settings" element={<Settings/>}/>
-                            <Route path="/detailedSystemInfo" element={<DetailedSystemInformation key={this.state.currentSystem.name} currentSystem={this.state.currentSystem}/>}/>
-                        </Route>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/history" element={<History currentSystem={this.state.currentSystem}/>}/>
+                        <Route path="/settings" element={<Settings/>}/>
+                        <Route path="/detailedSystemInfo"
+                               element={<DetailedSystemInformation key={this.state.currentSystem.name}
+                                                                   currentSystem={this.state.currentSystem}/>}/>
                     </Routes>
                 </BrowserRouter>
             </div>
