@@ -19,7 +19,9 @@ export default class Layout extends React.Component<IProps, IState> {
                 <nav className={"nav"}>
                     <Link className={"btn"} to={"/"}>Home</Link>
                     <Link className={"btn"} to={"/history"}>History</Link>
+                    <Link className={"btn"} to={"/detailedSystemInfo"}>Detailed System Info</Link>
                     <Link className={"btn"} to={"/settings"}>Settings</Link>
+
                 </nav>
                 <div className={"view-wrapper"}>
                     <Outlet/>

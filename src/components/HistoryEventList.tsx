@@ -7,12 +7,13 @@ interface Obj {
 
 interface IProps {
     onSelectEventHandler: (e: object) => void
+    maximum_loaded_events: number,
 }
 
 
 interface IState {
     events: Obj[],
-    autoscroll: boolean
+    autoscroll: boolean,
 }
 
 export default class HistoryEventList extends React.Component<IProps, IState> {
@@ -20,36 +21,50 @@ export default class HistoryEventList extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             events: [],
-            autoscroll: true
-
+            autoscroll: true,
         }
     }
 
     fetchInterval: any;
+    list: any
+
+    push_event_to_list = (events: Obj[]) => {
+        if (events.length !== undefined) {
+            let tmp_list = this.state.events
+
+
+            for (let e in events) {
+                // this checks if the length of the maximum loaded events is more or equal to the allowed amount.
+                // if it is triggered it will remove the first element of the list before adding the incoming one.
+                if (this.state.events.length >= this.props.maximum_loaded_events) {
+                    tmp_list.splice(0, 1)
+                }
+
+                tmp_list.push(events[e])
+
+
+            }
+            // auto scroll
+            if (this.state.autoscroll) {
+                this.list.scrollTop = this.list.scrollHeight
+            }
+            this.setState({"events": tmp_list})
+        }
+    }
 
     async componentDidMount() {
 
+
+        // TODO create a maximum events variable, this should be accessible through the settings api call
         await axios.get("http://localhost:3500/api/events/initial").then((response) => {
-            let tempEvents = this.state.events;
-
-            for (let e in response.data.results) {
-                tempEvents.push(response.data.results[e])
-            }
-
-            this.setState({"events": tempEvents})
+            this.push_event_to_list(response.data.results)
         })
 
         this.fetchInterval = setInterval(async () => {
             await axios.get("http://localhost:3500/api/events/latest").then((response) => {
-                console.log(response.data.results)
-                if (response.data.results.lenght > 0) {
-                    let tempEvents = this.state.events;
-
-                    for (let e in response.data.results) {
-                        tempEvents.push(response.data.results[e])
-                    }
-
-                    this.setState({"events": tempEvents})
+                if (response.data.results.length !== 0 && response.data.results.length !== undefined && response.data.results.length > 0) {
+                    console.log(response.data.results)
+                    this.push_event_to_list(response.data.results)
                 }
             })
         }, 1000)
@@ -60,13 +75,6 @@ export default class HistoryEventList extends React.Component<IProps, IState> {
         clearInterval(this.fetchInterval)
     }
 
-    list: any
-
-    componentDidUpdate() {
-        if (this.state.autoscroll) {
-            this.list.scrollTop = this.list.scrollHeight
-        }
-    }
 
     render() {
         return (
@@ -78,10 +86,10 @@ export default class HistoryEventList extends React.Component<IProps, IState> {
                         <span className={"emph"}>Active</span>) : (
                         <span className={"emph"}>not active</span>)} </button>
                 </div>
-                <div
-                    ref={(e) => {
-                    this.list = e
-                }} className={"event-list"}>
+                <div key={this.state.events.length}
+                     ref={(e) => {
+                         this.list = e
+                     }} className={"event-list"}>
                     {this.state.events && this.state.events.map((e, i) => (
                         <div tabIndex={this.state.events.length - i} key={`${i}`}
                              onFocus={() => this.props.onSelectEventHandler(e)}

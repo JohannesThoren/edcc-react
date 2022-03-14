@@ -8,11 +8,15 @@ import DetailedSystemInformation from "./pages/DetailedSystemInformation"
 import "./style/style.scss"
 import axios from "axios";
 
+interface obj {
+    [key: string]: any
+}
+
 interface IProps {
 }
 
 interface IState {
-    currentSystem: object
+    currentSystem: obj
 }
 
 export default class App extends React.Component<IProps, IState> {
@@ -28,7 +32,6 @@ export default class App extends React.Component<IProps, IState> {
     async componentDidMount() {
         this.fetchCurrentSystemInterval = setInterval(async () => {
             await axios.get("http://localhost:3500/api/system").then((response: any) => {
-                console.log(response.data)
                 this.setState({"currentSystem": response.data})
             })
         }, 1000)
@@ -42,7 +45,7 @@ export default class App extends React.Component<IProps, IState> {
                         <Route path="/" element={<Layout/>}>
                             <Route path="/history" element={<History currentSystem={this.state.currentSystem}/>}/>
                             <Route path="/settings" element={<Settings/>}/>
-                            <Route path="/detailedSystemInfo" element={<DetailedSystemInformation/>}/>
+                            <Route path="/detailedSystemInfo" element={<DetailedSystemInformation key={this.state.currentSystem.name} currentSystem={this.state.currentSystem}/>}/>
                         </Route>
                     </Routes>
                 </BrowserRouter>

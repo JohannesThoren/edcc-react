@@ -21,7 +21,7 @@ export default class Settings extends React.Component<IProps, IState> {
 
 
     async componentDidMount() {
-        await axios.get("http://localhost:3500/api/get/settings").then((response) => {
+        await axios.get("http://localhost:3500/api/settings").then((response) => {
             this.setState({"settings": response.data.results})
         })
     }
@@ -31,7 +31,7 @@ export default class Settings extends React.Component<IProps, IState> {
             <>
                 {this.state.settings && (
                     <div className={"settings"}>
-                        <JournalSettings journal_path={this.state.settings.journal_location}/>
+                        <JournalSettings journal_path={this.state.settings.journal_location} maximum_events={this.state.settings.maximum_loaded_events}/>
                         <CommanderSettings currentCommander={this.state.settings.current_commander} commanders={this.state.settings.commanders}/>
                     </div>
 

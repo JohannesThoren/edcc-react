@@ -1,0 +1,89 @@
+.detailed-system-info {
+  height: 100%;
+  width: 100%;
+
+  display: grid;
+  grid-template-areas:
+    'si sb sb'
+    'vb sb sb'
+    'vb sb sb'
+    'vb sb sb'
+    'vb sb sb'
+    'vb sb sb'
+    'vb sb sb';
+
+  .current-system-detailed {
+    grid-area: si;
+
+    border: 1px solid var(--accent-1);
+
+    .item {
+      padding-inline: 10px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: var(--accent-1) dotted 1px;
+    }
+
+
+  }
+
+  .valuable-bodies {
+    grid-area: vb;
+    border: 1px solid var(--accent-1);
+    padding-inline: 10px;
+
+    .body-list {
+      max-height: 32vh;
+      overflow-y: auto;
+    }
+
+    .body {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .system-bodies {
+
+    grid-area: sb;
+
+
+    border: 1px solid var(--accent-1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .body-data {
+      overflow: auto;
+      max-height: 90vh;
+      box-sizing: border-box;
+      max-width: 100%;
+    }
+
+    .system-bodies-list {
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+
+      .item:nth-child(even) {
+        background-color: #181818;
+      }
+
+      .item:hover {
+        background-color: var(--accent-1);
+        cursor: pointer;
+      }
+
+      .item {
+        padding-inline: 5px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+
+        * {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
