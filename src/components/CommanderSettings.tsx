@@ -27,8 +27,9 @@ export default function CommanderSettings(props: { currentCommander: string, com
         }
         setWaiting(true)
 
-        await axios.post("http://localhost:3500/api/settings/", {"commanders":[newCommander]}).then((response) => {
+        await axios.post("http://0.0.0.0:3500/api/commander", {"headers": {"Access-Control-Allow-Origin": "*"},"new-commander": newCommander}).then((response) => {
             console.log(response)
+            props.commanders.push(response.data)
             setWaiting(false)
 
         })
@@ -37,7 +38,7 @@ export default function CommanderSettings(props: { currentCommander: string, com
     const setCurrentCommanderCall = async (commanderName: string) => {
         setWaiting(true)
 
-        await axios.post("http://localhost:3500/api/settings", {"current_commander": commanderName}).then((response) => {
+        await axios.post("http://0.0.0.0:3500/api/settings", {"current_commander": commanderName}).then((response) => {
             console.log(response)
             setCurrentCommander(response.data.current_commander)
             setWaiting(false)
@@ -76,7 +77,7 @@ export default function CommanderSettings(props: { currentCommander: string, com
                    placeholder={"EDSM API Key"}/>
             <input className={"input"} onChange={(e) => setNewCommanderEdsmName(e.target.value)} type="text"
                    placeholder={"EDSM Name"}/>
-            <button className={"btn"} onClick={() => setNewCommanderInfo()}>Save Commander</button>
+            <button className={"btn"} onClick={async () => await setNewCommanderInfo()}>Save Commander</button>
 
         </div>
     )

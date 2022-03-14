@@ -56,12 +56,12 @@ export default class HistoryEventList extends React.Component<IProps, IState> {
 
 
         // TODO create a maximum events variable, this should be accessible through the settings api call
-        await axios.get("http://localhost:3500/api/events/initial").then((response) => {
+        await axios.get("http://0.0.0.0:3500/api/events/initial").then((response) => {
             this.push_event_to_list(response.data.results)
         })
 
         this.fetchInterval = setInterval(async () => {
-            await axios.get("http://localhost:3500/api/events/latest").then((response) => {
+            await axios.get("http://0.0.0.0:3500/api/events/latest").then((response) => {
                 if (response.data.results.length !== 0 && response.data.results.length !== undefined && response.data.results.length > 0) {
                     console.log(response.data.results)
                     this.push_event_to_list(response.data.results)

@@ -5,13 +5,13 @@ export default function JournalSettings(props: { journal_path: string, maximum_e
     const [path, sethPath] = React.useState(props.journal_path);
     const [maximum_events, setMaximumEvents] = React.useState(props.maximum_events)
     const save_journal_path = async () => {
-        await axios.post("http://localhost:3500/api/settings", {"journal_location": path}).then((response) => {
+        await axios.post("http://0.0.0.0:3500/api/settings", {"journal_location": path}).then((response) => {
             console.log(response.data)
         })
     }
 
     const set_maximum_events = async () => {
-        await axios.post("http://localhost:3500/api/settings", {"maximum_loaded_events": maximum_events}).then((response) => {
+        await axios.post("http://0.0.0.0:3500/api/settings", {"maximum_loaded_events": maximum_events}).then((response) => {
             console.log(response.data)
         })
     }

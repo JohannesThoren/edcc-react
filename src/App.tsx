@@ -32,7 +32,7 @@ export default class App extends React.Component<IProps, IState> {
 
     async componentDidMount() {
         this.fetchCurrentSystemInterval = setInterval(async () => {
-            await axios.get("http://localhost:3500/api/system").then((response: any) => {
+            await axios.get("http://0.0.0.0:3500/api/system").then((response: any) => {
                 this.setState({"currentSystem": response.data})
             })
         }, 1000)

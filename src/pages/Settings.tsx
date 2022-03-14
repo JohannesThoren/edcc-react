@@ -21,7 +21,7 @@ export default class Settings extends React.Component<IProps, IState> {
 
 
     async componentDidMount() {
-        await axios.get("http://localhost:3500/api/settings").then((response) => {
+        await axios.get("http://0.0.0.0:3500/api/settings").then((response) => {
             this.setState({"settings": response.data.results})
         })
     }

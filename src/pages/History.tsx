@@ -30,7 +30,7 @@ export default class History extends React.Component<IProps, IState> {
 
 
     async componentDidMount() {
-        await axios.get("http://localhost:3500/api/settings").then((response) => {
+        await axios.get("http://0.0.0.0:3500/api/settings").then((response) => {
             this.setState({"maximum_loaded_events": response.data.results.maximum_loaded_events})
         })
     }
